@@ -98,4 +98,3 @@ function clear_pokemon_data_on_deactivation() {
 // Initialize the plugin
 $pokemon_plugin = new PokemonPlugin();
 $pokemon_rest = new PokemonREST();
-

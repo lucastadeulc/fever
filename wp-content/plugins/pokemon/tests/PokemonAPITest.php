@@ -1,15 +1,15 @@
 <?php
+
 /**
  * Class PokemonAPITest
  *
  * @package Pokemon
  */
 
-/**
- * Sample test case.
- */
-class PokemonAPITest extends WP_UnitTestCase {
-    public function testGetPokemonData() {
+class PokemonAPITest extends WP_UnitTestCase
+{
+    public function testGetPokemonData()
+    {
         // Create an instance of the PokemonAPI class
         $pokemonAPI = new PokemonAPI();
 

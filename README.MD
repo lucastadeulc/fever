@@ -72,3 +72,18 @@ Clone into your Wordpress folder
 Activate plugin and theme
 - Plugin on activation will automatically add 3 pokemons
 Ready to test!
+
+Routes for testing:  
+// Single pokemon endpoint  
+/wp-json/custom/v1/pokemon/{ID}  
+
+// All pokemon endpoint  
+/wp-json/custom/v1/pokemons  
+
+// All pokemon described endpoint  
+/wp-json/custom/v1/pokemons-detailed/  
+/wp-json/custom/v1/pokemons-detailed/grass  
+
+// 5 types endpoint  
+/wp-json/custom/v1/pokemons-types  
+

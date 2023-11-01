@@ -16,7 +16,7 @@ get_header();
                 <div class="pokemon-container col-24"></div>
             </div>
 
-            <?php echo paginate_links(); ?>
+            <?php //echo paginate_links(); ?>
         </div>
     </div>
 </div>

@@ -58,7 +58,7 @@ For now I left a POKEMON_PLUGIN_MAX_ATTACKS_PER_POKEMON with value of 5.
   
 
 ## Missing:  
-pagination on typescript filter and consider scalability
+pagination on typescript filter and consider scalability  
 tests  
   
 ## How to reproduce:  
@@ -83,9 +83,9 @@ tests
 // 5 types endpoint  
 /wp-json/custom/v1/pokemons-types  
 
-// Single pokemon
+// Single pokemon  
 /pokemon/charizard
 
-// Pokemon archive + filter
+// Pokemon archive + filter  
 /pokemon
 

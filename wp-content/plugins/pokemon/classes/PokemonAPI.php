@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 class PokemonAPI
 {
     private $base_url = 'https://pokeapi.co/api/v2/';
@@ -7,7 +6,7 @@ class PokemonAPI
 
     public function get_pokemon_data($pokemon_name)
     {
-        $url = $this->base_url . 'pokemon/' . $pokemon_name;
+        $url = $this->base_url . PokemonPlugin::POKEMON_PLUGIN_SLUG_NAME. '/' . $pokemon_name;
         $response = wp_safe_remote_get($url);
 
         if (is_wp_error($response)) {
@@ -24,12 +23,13 @@ class PokemonAPI
         $description = $this->get_pokemon_description($pokemon_data->species->url);
 
         // Fetch the attacks with short descriptions
-        $attacks = $this->get_pokemon_attacks($pokemon_data->moves);
+        $attacks = $this->get_pokemon_attacks(array_slice($pokemon_data->moves, 0, PokemonPlugin::POKEMON_PLUGIN_MAX_ATTACKS_PER_POKEMON));
 
-        // Add the sprite URL, description, and attacks to the Pokémon data
+        // Add the sprite URL, description, number_old, and attacks to the Pokémon data
         $pokemon_data->sprite_url = $sprite_url;
         $pokemon_data->description = $description;
         $pokemon_data->attacks = $attacks;
+        $pokemon_data->pokedex_number_old = isset($pokemon_data->game_indices[0]->game_index) ? $pokemon_data->game_indices[0]->game_index : 'Not available';
 
         return $pokemon_data;
     }
@@ -54,33 +54,6 @@ class PokemonAPI
         return $this::POKEMON_API_NO_DESCRIPTION;
     }
 
-    private function get_pokemon_attacks($moves)
-    {
-        if (!$moves) {
-            return false;
-        }
-
-        $attacks = [];
-
-        foreach ($moves as $move) {
-            $attack_data = $this->get_attack_data($move->move->url);
-
-            if ($attack_data) {
-                $attack_name = $move->move->name;
-                $attack_description = $this->get_attack_description($attack_data);
-
-                if ($attack_description) {
-                    $attacks[] = [
-                        'name' => $attack_name,
-                        'description' => $attack_description,
-                    ];
-                }
-            }
-        }
-
-        return $attacks;
-    }
-
     private function get_attack_description($attack_data)
     {
         if (isset($attack_data->effect_entries) && is_array($attack_data->effect_entries)) {
@@ -93,16 +66,60 @@ class PokemonAPI
         return $this::POKEMON_API_NO_DESCRIPTION;
     }
 
-    private function get_attack_data($attack_url)
+    private function get_multiple_attack_data($move_urls)
     {
-        $response = wp_safe_remote_get($attack_url);
-
-        if (is_wp_error($response)) {
+        // This could have been improved to do multiple requests per once
+        $attack_data = [];
+    
+        foreach ($move_urls as $url) {
+            $response = wp_safe_remote_request($url);
+    
+            if (!is_wp_error($response)) {
+                $body = wp_remote_retrieve_body($response);
+                $data = json_decode($body);
+    
+                if (isset($data->id)) {
+                    $attack_data[$url] = $data;
+                }
+            }
+        }
+    
+        return $attack_data;
+    }    
+    
+    private function get_pokemon_attacks($moves)
+    {
+        if (!$moves) {
             return false;
         }
-
-        return json_decode(wp_remote_retrieve_body($response));
+    
+        $attacks = [];
+    
+        $move_urls = array_map(function($move) {
+            return $move->move->url;
+        }, $moves);
+    
+        // Retrieve attack data for all moves at once
+        $attack_data = $this->get_multiple_attack_data($move_urls);
+    
+        foreach ($moves as $move) {
+            $attack_name = $move->move->name;
+    
+            if (isset($attack_data[$move->move->url])) {
+                $attack_description = $this->get_attack_description($attack_data[$move->move->url]);
+    
+                if ($attack_description) {
+                    $attacks[] = [
+                        'name' => $attack_name,
+                        'description' => $attack_description,
+                    ];
+                }
+            }
+        }
+    
+        return $attacks;
     }
+    
 
     public function get_first_5_pokemon_types()
     {

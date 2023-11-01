@@ -34,14 +34,14 @@ class PokemonREST
         ));
 
         // All pokemon described endpoint
-        // wp-json/custom/v1/pokemon-detailed/grass
+        // wp-json/custom/v1/pokemons-detailed/grass
         register_rest_route($this::POKEMON_REST_DEFAULT_ROUTE, '/'.$this::POKEMON_REST_EXPORT_ROUTE_DETAILED.'(/(?P<type>[\w-]+))?', array(
             'methods'  => 'GET',
             'callback' => array($this, 'get_pokemon_list_with_details'),
         ));
 
         // 5 types endpoint
-        // wp-json/custom/v1/pokemon-types
+        // wp-json/custom/v1/pokemons-types
         register_rest_route($this::POKEMON_REST_DEFAULT_ROUTE, '/'.$this::POKEMON_REST_EXPORT_ROUTE_TYPES, array(
             'methods'  => 'GET',
             'callback' => array($this, 'get_first_5_pokemon_types'),

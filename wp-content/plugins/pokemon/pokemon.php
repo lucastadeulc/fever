@@ -16,11 +16,11 @@ require_once dirname(__FILE__) . '/classes/PokemonAPI.php';
 require_once dirname(__FILE__) . '/classes/PokemonClearer.php';
 require_once dirname(__FILE__) . '/classes/Pokemon.php';
 require_once dirname(__FILE__) . '/classes/PokemonREST.php';
-//PokemonClearer::clear_all_pokemons();
 
 class PokemonPlugin
 {
     const POKEMON_PLUGIN_SLUG_NAME = 'pokemon';
+    const POKEMON_PLUGIN_MAX_ATTACKS_PER_POKEMON = 5;
 
     public function __construct()
     {
@@ -72,7 +72,7 @@ class PokemonPlugin
     public function generate_random_pokemon() {
         $poke_api = new PokemonAPI();
 
-        // Get a random Pokémon from the API
+        // Get a random Pokémon number
         $random_pokemon_id = rand(1, 898); 
 
         // Fetch data for the random Pokémon

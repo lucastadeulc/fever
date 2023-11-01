@@ -27,7 +27,7 @@ class Pokemon {
             update_post_meta($post_id, 'pokemon_primary_type', $pokemon_data->types[0]->type->name);
             update_post_meta($post_id, 'pokemon_secondary_type', isset($pokemon_data->types[1]) ? $pokemon_data->types[1]->type->name : '');
             update_post_meta($post_id, 'pokemon_weight', $pokemon_data->weight);
-            update_post_meta($post_id, 'pokedex_number_old', $pokemon_data->id);
+            update_post_meta($post_id, 'pokedex_number_old', $pokemon_data->pokedex_number_old);
             update_post_meta($post_id, 'pokedex_number_recent', $pokemon_data->id);
             update_post_meta($post_id, 'pokemon_description', $pokemon_data->description);
 
@@ -63,9 +63,8 @@ class Pokemon {
             }
         }
 
-        wp_reset_postdata(); // Reset the query to avoid interference with other queries.
+        wp_reset_postdata();
 
-        echo $post_id;
         return $post_id;
     }
 

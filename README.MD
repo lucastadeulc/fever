@@ -58,8 +58,7 @@ For now I left a POKEMON_PLUGIN_MAX_ATTACKS_PER_POKEMON with value of 5.
   
 
 ## Missing:  
-pagination on typescript filter and consider scalability  
-tests  
+Pagination on typescript filter and to consider scalability on retrieve of pokemons from wp_rest  
   
 ## How to reproduce:  
 1- Initialize your Wordpress site as you prefer, using PHP 8+  

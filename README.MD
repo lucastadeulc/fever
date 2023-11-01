@@ -27,7 +27,7 @@ Enhanced the filter in the REST API to also filter by secondary type
 Added ajax button in single pokemon  
 Fixed problem with old pokedex number, retrieved correctly now  
 Tried to improve the attacks insertion, by using multiple requests, but failed to  
-Overall end 2 end tests part 3
+Overall end 2 end tests part 3  
 Tests writing and problem with setup  
 
 

@@ -12,8 +12,6 @@ class PokemonAPITest extends WP_UnitTestCase
     {
         // Create an instance of the PokemonAPI class
         $pokemonAPI = new PokemonAPI();
-
-        // Call the method you want to test
         $pokemonData = $pokemonAPI->get_pokemon_data('pikachu');
 
         // Assertions

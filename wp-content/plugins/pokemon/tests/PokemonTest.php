@@ -5,7 +5,6 @@
  */
 class PokemonTest extends WP_UnitTestCase
 {
-
     /**
      * Test creating a new Pokémon and updating its properties.
      */

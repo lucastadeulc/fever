@@ -8,7 +8,6 @@ function createPokemonCard(pokemon) {
             <h2 class="card-title text-capitalize">${pokemon.name}</h2>
             <p class="card-text">Primary Type: ${pokemon.primary_type}</p>
             ${pokemon.secondary_type ? `<p class="card-text">Secondary Type: ${pokemon.secondary_type}</p>` : ''}
-            <!-- Add more details here -->
             </div>
         </div>
       </a>`;

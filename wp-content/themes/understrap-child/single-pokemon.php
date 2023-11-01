@@ -20,7 +20,7 @@ get_header();
                 $primary_type = get_post_meta(get_the_ID(), 'pokemon_primary_type', true);
                 $secondary_type = get_post_meta(get_the_ID(), 'pokemon_secondary_type', true);
                 $pokemon_weight = get_post_meta(get_the_ID(), 'pokemon_weight', true);
-                $pokedex_number_old = get_post_meta(get_the_ID(), 'pokedex_number_old', true);
+                //$pokedex_number_old = get_post_meta(get_the_ID(), 'pokedex_number_old', true);
                 $pokedex_number_recent = get_post_meta(get_the_ID(), 'pokedex_number_recent', true);
                 $pokemon_attacks = get_post_meta(get_the_ID(), 'pokemon_attacks', true);
                 ?>
@@ -30,10 +30,11 @@ get_header();
                 <p>Primary Type: <?php echo $primary_type; ?></p>
                 <p>Secondary Type: <?php echo $secondary_type; ?></p>
                 <p>Weight: <?php echo $pokemon_weight; ?> kg</p>
-                <p>Pokedex Number (Old): <?php echo $pokedex_number_old; ?></p>
                 <p>Pokedex Number (Recent): <?php echo $pokedex_number_recent; ?></p>
+                <button id="fetch-pokedex-button" class="btn btn-primary">Fetch Pokedex Number (Old)</button>
+                <p id="pokedex-old-result" class="my-3"></p>
             </div>
-            <?php if ($pokemon_attacks && is_array($pokemon_attacks)): ?>
+            <?php if ($pokemon_attacks && is_array($pokemon_attacks)) : ?>
                 <div class="pokemon-attacks mt-5">
                     <h2>Attacks:</h2>
                     <table class="table">

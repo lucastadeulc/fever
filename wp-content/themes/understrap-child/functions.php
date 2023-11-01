@@ -185,4 +185,28 @@ function enqueue_pokemon_fetch_js() {
 add_action('wp_enqueue_scripts', 'enqueue_pokemon_fetch_js');
 // End Enqueue script for pokemon archive
 
-  
+// Ajax for pokedex_number_old
+function get_pokedex_number_old() {
+    $post_id = $_POST['postId'];
+    $pokedex_number_old = get_post_meta($post_id, 'pokedex_number_old', true);
+
+    echo $pokedex_number_old;
+    wp_die();
+}
+
+add_action('wp_ajax_get_pokedex_number_old', 'get_pokedex_number_old');
+add_action('wp_ajax_nopriv_get_pokedex_number_old', 'get_pokedex_number_old');
+
+function enqueue_pokemon_ajax_script() {
+    if (is_single() && is_singular('pokemon')) {
+        $post_id = get_the_ID();
+        wp_enqueue_script('pokemon-ajax', get_stylesheet_directory_uri() . '/js/pokemon-ajax.js', array('jquery'), null, true);
+
+        wp_localize_script('pokemon-ajax', 'pokemonData', array(
+            'post_id' => $post_id,
+            'ajax_url' => admin_url('admin-ajax.php'),
+        ));
+    }
+}
+add_action('wp_enqueue_scripts', 'enqueue_pokemon_ajax_script');
+// End Ajax for pokedex_number_old

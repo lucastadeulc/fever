@@ -27,6 +27,7 @@ Enhanced the filter in the REST API to also filter by secondary type
 Added ajax button in single pokemon  
 Fixed problem with old pokedex number, retrieved correctly now  
 Tried to improve the attacks insertion, by using multiple requests, but failed to  
+Tests writing and problem with setup  
 
 
 Problems and decisions by topic:  
@@ -53,26 +54,18 @@ WP Object Cache API to cache query results
 2- Tried to improve the attack insertion, which is making 1 request to the API per attack, to grab the description.  
 Unfortunately no success to make several requests per once.  
 For now I left a POKEMON_PLUGIN_MAX_ATTACKS_PER_POKEMON with value of 5.  
+  
 
-
-Missing:
-pagination thinking about scalability, posts_per_page = 6  
+Missing:  
+pagination on typescript filter and consider scalability
 tests  
-
-Tests:
-Have wget and svn installed  
-Create a new database(wp_test)  
-cd into plugin folder using shell  
-bin/install-wp-tests.sh  wp_test  root root localhost:10066 latest true  
-
-
-Reproduce:
-Initialize your Wordpress site as you prefer, using PHP 8+  
-Clone into your Wordpress folder  
-Activate plugin and theme  
+  
+Reproduce:  
+1- Initialize your Wordpress site as you prefer, using PHP 8+  
+2- Clone into your Wordpress root folder  
+3- Activate plugin and child theme  
 - Plugin on activation will automatically add 3 pokemons  
-
-Ready to test!
+4- Ready to test!
 
 Routes for testing:  
 // Single pokemon endpoint  

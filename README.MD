@@ -1,4 +1,4 @@
-Step by step:  
+## Step by step:  
 Created new site using local by flywheel  
 Created plugin using wpcli scaffold  
 Cloned git@github.com:understrap/understrap-child.git  
@@ -27,10 +27,11 @@ Enhanced the filter in the REST API to also filter by secondary type
 Added ajax button in single pokemon  
 Fixed problem with old pokedex number, retrieved correctly now  
 Tried to improve the attacks insertion, by using multiple requests, but failed to  
+Overall end 2 end tests part 3
 Tests writing and problem with setup  
 
 
-Problems and decisions by topic:  
+## Problems and decisions by topic:  
 2- I created every pokemon property as post_meta to facilitate usage and retrieve,
 I do know that primary and secondary type could have been added as a taxonomy, 
 since they are group properties, but I didn't judge this as necessary for this challenge.  
@@ -56,18 +57,19 @@ Unfortunately no success to make several requests per once.
 For now I left a POKEMON_PLUGIN_MAX_ATTACKS_PER_POKEMON with value of 5.  
   
 
-Missing:  
+## Missing:  
 pagination on typescript filter and consider scalability
 tests  
   
-Reproduce:  
+## How to reproduce:  
 1- Initialize your Wordpress site as you prefer, using PHP 8+  
 2- Clone into your Wordpress root folder  
 3- Activate plugin and child theme  
 - Plugin on activation will automatically add 3 pokemons  
+
 4- Ready to test!
 
-Routes for testing:  
+## Routes and pages for testing:  
 // Single pokemon endpoint  
 /wp-json/custom/v1/pokemon/{ID}  
 
@@ -80,4 +82,10 @@ Routes for testing:
 
 // 5 types endpoint  
 /wp-json/custom/v1/pokemons-types  
+
+// Single pokemon
+/pokemon/charizard
+
+// Pokemon archive + filter
+/pokemon
 

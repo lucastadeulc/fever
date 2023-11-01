@@ -89,3 +89,9 @@ tests
 // Pokemon archive + filter  
 /pokemon
 
+// Random  
+/random  
+
+// Generate  
+/generate  
+
